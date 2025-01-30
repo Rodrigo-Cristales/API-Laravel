@@ -37,7 +37,7 @@ const LoginForm = () => {
         </button>
         <br /><br />
         <p className="text-sm font-light text-white dark:text-gray-400">
-          ¿Aún no tienes una cuenta? | <Link to="/register" className="font-medium text-primary-600 hover:underline dark:text-primary-500">¡Regístrate!</Link>
+          ¿Aún no tienes una cuenta? | <Link to="/" className="font-medium text-primary-600 hover:underline dark:text-primary-500">¡Regístrate!</Link>
         </p>
       </form>
     </div>
