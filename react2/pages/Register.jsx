@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
@@ -70,7 +71,7 @@ const Register = () => {
         </form>
 
         <p className="text-sm text-center mt-2 text-white">
-          ¿Ya tienes cuenta? <a href="/login" className="text-blue-500">Inicia sesión</a>
+          ¿Ya tienes cuenta? <Link to={'/login'}  className="text-blue-500">Inicia sesión</Link>
         </p>
       </div>
     </div>
