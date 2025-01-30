@@ -152,9 +152,9 @@ class UserController extends Controller
         $currentToken = $request->user()->currentAccessToken();
         if ($currentToken && $currentToken->created_at->addMinutes(4)->isFuture()) {
             return response()->json([
-                'msj' => 'El token actual aún es válido',
+                'error' => 'El token actual aún es válido',
                 'expires_at' => $currentToken->created_at->addMinutes(5)->toDateTimeString()
-            ], 200);
+            ], 400);
         }
 
         // Revocar tokens anteriores
