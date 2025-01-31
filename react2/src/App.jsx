@@ -6,6 +6,7 @@ import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import PageNotFound from '../pages/PageNotFound';
+import EstadisticasUsers from '../pages/EstadisticasUsers';
 import 'flowbite';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home/>}/>
           <Route path="*" element={<PageNotFound />} /> {/* Página 404 */}
+          <Route path="/estadisticas" element = {<EstadisticasUsers/>}/> {/*Ruta para estadisticas de usuarios*/}
         </Routes>
       </div>
     </Router>

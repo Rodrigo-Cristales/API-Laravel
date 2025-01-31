@@ -37,7 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //Rutas para los estadisticas de los usuarios
 
-    Route::get('users/stats/day', [UserController::class, 'userDays']);
-    Route::get('users/stats/week', [UserController::class, 'usersByWeek']);
-    Route::get('users/stats/moth', [UserController::class, 'usersByMonth']);
+    Route::get('users/stats/days', [UserController::class, 'UserDays']);
+    Route::get('users/stats/week', [UserController::class, 'UsersByWeek']);
+    Route::get('users/stats/month', [UserController::class, 'UsersByMonth']);
 });
