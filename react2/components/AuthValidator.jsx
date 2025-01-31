@@ -36,14 +36,14 @@ const AuthValidator = ({ children }) => {
         }  
 
       } catch (error) {
-        Swal.fire({
-          icon: "error",
-          title: "Sesión Expirada",
-          text: "Hubo un error",
-          background: "#21252b",
-          color: "white",
-          confirmButtonColor: "#374151"
-        });
+        // Swal.fire({
+        //   icon: "error",
+        //   title: "Sesión Expirada",
+        //   text: "Hubo un error",
+        //   background: "#21252b",
+        //   color: "white",
+        //   confirmButtonColor: "#374151"
+        // });
         localStorage.removeItem("token");
         navigate("/login");
       } finally {

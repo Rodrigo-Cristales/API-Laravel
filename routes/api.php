@@ -27,3 +27,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [UserController::class, 'logout']);
     Route::post('/refresh-token', [UserController::class, 'refreshToken']);
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/users', [UserController::class, 'index']);  // Mostrar todos los usuarios
+    Route::get('/users/{id}', [UserController::class, 'show']);  // Mostrar un usuario por ID
+    Route::post('/users', [UserController::class, 'store']);  // Crear un usuario
+    Route::put('/users/{id}', [UserController::class, 'update']);  // Actualizar un usuario
+    Route::delete('/users/{id}', [UserController::class, 'destroy']);  // Eliminar un usuario
+});
