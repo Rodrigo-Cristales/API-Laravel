@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AuthValidator from "../components/AuthValidator";
+import Swal from "sweetalert2";
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -90,6 +91,80 @@ function Home() {
     }
   };
 
+  // Función para abrir el modal de registro
+  const handleRegister = () => {
+    Swal.fire({
+      title: "Registrar Usuario",
+      background: '#384050',
+      color: 'black',
+      html: `
+        <input id="name" placeholder="Nombre" type="text">
+        <input id="email" placeholder="Correo" type="email">
+        <input id="password" placeholder="Contraseña" type="password">
+      `,
+      confirmButtonText: "Registrar",
+      confirmButtonColor: "#276641",
+      preConfirm: async () => {
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        if (!name || !email || !password) {
+          Swal.showValidationMessage("Por favor, completa todos los campos.");
+          return false;
+        }
+
+        try {
+          // Realizar la petición POST para registrar al usuario
+          await axios.post(
+            "http://127.0.0.1:8000/api/register",
+            { name, email, password },
+            // {
+            //   headers: {
+            //     Authorization: `Bearer ${localStorage.getItem("token")}`,
+            //   },
+            // }
+          );
+          Swal.fire({
+            icon: 'success',
+            title: 'Registro exitoso',
+            text: '✅ Usuario registrado correctamente.',
+            timer: 2000,
+            background: '#21252b',
+            color: 'white',
+            showConfirmButton: false,
+            confirmButtonColor: '#374151'
+          });
+          fetchUsers(); // Recargar la lista de usuarios
+        } catch (error) {
+          if (error.response && error.response.data) {
+            const errorData = error.response.data;
+            let errorMessage = "";
+
+            // Extrae mensajes de error del JSON
+            if (typeof errorData === 'object') {
+              Object.values(errorData).forEach(errors => {
+                Object.values(errors).forEach(msgArray => {
+                  errorMessage += `• ${msgArray.join(' ')}\n`;
+                });
+              });
+            }
+
+            Swal.fire({
+              icon: 'error',
+              title: 'Error al registrar',
+              text: errorMessage || 'Ocurrió un error inesperado.',
+              background: '#21252b',
+              color: 'white',
+              confirmButtonColor: '#374151'
+            });
+          }
+        }
+      },
+    });
+  };
+
+
   return (
     <AuthValidator>
       <div className="container mx-auto pt-8 mt-6">
@@ -102,6 +177,12 @@ function Home() {
         </button> */}
 
         {/* Tabla */}
+        <button
+          onClick={handleRegister}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+        >
+          Agregar Usuario
+        </button>
         <div className="overflow-x-auto mt-4">
           <table className="table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-800 dark:text-gray-400">
