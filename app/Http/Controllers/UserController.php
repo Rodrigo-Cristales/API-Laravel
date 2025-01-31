@@ -224,4 +224,24 @@ class UserController extends Controller
 
         return response()->json(['message' => 'Sesión cerrada exitosamente']);
     }
+
+    //Funcion para retornar los usuarios registrados en el dia actual
+    public function userDays(){
+        $usuario = User::whereDate('created_at', today())->count();
+        return response()->json(['usuario' => $usuario]);
+    }
+    //Retorna los usuarios registrados en la semana 
+    public function usersByWeek()
+    {
+        $usuario = User::whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])->count();
+        return response()->json(['users_this_week' => $usuario]);
+    }
+    //Retorna los usuarios registrados en el mes
+    public function usersByMonth()
+{
+    $usuario = User::whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->count();
+    return response()->json(['users_this_month' => $usuario]);
+}
+
+
 }

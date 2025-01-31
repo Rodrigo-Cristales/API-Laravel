@@ -34,4 +34,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/users', [UserController::class, 'store']);  // Crear un usuario
     Route::put('/users/{id}', [UserController::class, 'update']);  // Actualizar un usuario
     Route::delete('/users/{id}', [UserController::class, 'destroy']);  // Eliminar un usuario
+
+    //Rutas para los estadisticas de los usuarios
+
+    Route::get('users/stats/day', [UserController::class, 'userDays']);
+    Route::get('users/stats/week', [UserController::class, 'usersByWeek']);
+    Route::get('users/stats/moth', [UserController::class, 'usersByMonth']);
 });
