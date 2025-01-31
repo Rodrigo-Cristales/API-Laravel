@@ -79,15 +79,34 @@ function Home() {
   };
 
   const handleDelete = async (id) => {
-    try {
-      await axios.delete(`http://127.0.0.1:8000/api/users/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      fetchUsers(); // Volver a cargar los usuarios después de eliminar
-    } catch (error) {
-      console.error("Error al eliminar el usuario", error);
+
+    const result = await Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¿Deseas eliminar al usuario?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'No, cancelar',
+      cancelButtonColor: '#b0454c',
+      confirmButtonColor: '#1e553c',
+      reverseButtons: true,
+      background: '#21252b',
+      color: 'white',
+    });
+
+
+    if (result.isConfirmed) {
+      try {
+        await axios.delete(`http://127.0.0.1:8000/api/users/${id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        fetchUsers(); // Volver a cargar los usuarios después de eliminar
+      } catch (error) {
+        console.error("Error al eliminar el usuario", error);
+      }
+      return;
     }
   };
 
@@ -119,11 +138,7 @@ function Home() {
           await axios.post(
             "http://127.0.0.1:8000/api/register",
             { name, email, password },
-            // {
-            //   headers: {
-            //     Authorization: `Bearer ${localStorage.getItem("token")}`,
-            //   },
-            // }
+
           );
           Swal.fire({
             icon: 'success',
@@ -168,13 +183,6 @@ function Home() {
   return (
     <AuthValidator>
       <div className="container mx-auto pt-8 mt-6">
-        {/* Botón para abrir el modal */}
-        {/* <button
-          onClick={() => handleModalOpen()}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg"
-        >
-          Abrir Formulario
-        </button> */}
 
         {/* Tabla */}
         <button
