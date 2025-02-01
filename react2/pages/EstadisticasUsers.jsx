@@ -51,29 +51,32 @@ const EstadisticasUsers = () => {
 
     return (
         <>
-            <h1>Estadísticas de usuarios creados</h1>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                <thead>
-                    <tr>
-                        <th style={{ border: '1px solid #ddd', padding: '8px' }}>Periodo</th>
-                        <th style={{ border: '1px solid #ddd', padding: '8px' }}>Usuarios Registrados</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style={{ border: '1px solid #ddd', padding: '8px' }}>Hoy</td>
-                        <td style={{ border: '1px solid #ddd', padding: '8px' }}>{stats.day}</td>
-                    </tr>
-                    <tr>
-                        <td style={{ border: '1px solid #ddd', padding: '8px' }}>Esta Semana</td>
-                        <td style={{ border: '1px solid #ddd', padding: '8px' }}>{stats.week}</td>
-                    </tr>
-                    <tr>
-                        <td style={{ border: '1px solid #ddd', padding: '8px' }}>Este Mes</td>
-                        <td style={{ border: '1px solid #ddd', padding: '8px' }}>{stats.month}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <h1 className="text-2xl font-bold text-center my-4">Estadísticas de usuarios creados</h1>
+<div className="overflow-x-auto">
+  <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+    <thead className="bg-blue-500 text-white">
+      <tr>
+        <th className="px-6 py-3 text-left text-sm font-semibold uppercase">Periodo</th>
+        <th className="px-6 py-3 text-left text-sm font-semibold uppercase">Usuarios Registrados</th>
+      </tr>
+    </thead>
+    <tbody className="divide-y divide-gray-200">
+      <tr className="hover:bg-gray-100">
+        <td className="px-6 py-4 text-gray-700">Hoy</td>
+        <td className="px-6 py-4 font-semibold text-gray-900">{stats.day}</td>
+      </tr>
+      <tr className="hover:bg-gray-100">
+        <td className="px-6 py-4 text-gray-700">Esta Semana</td>
+        <td className="px-6 py-4 font-semibold text-gray-900">{stats.week}</td>
+      </tr>
+      <tr className="hover:bg-gray-100">
+        <td className="px-6 py-4 text-gray-700">Este Mes</td>
+        <td className="px-6 py-4 font-semibold text-gray-900">{stats.month}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
         </>
     );
 };
