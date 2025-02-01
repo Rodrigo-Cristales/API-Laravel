@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\Hash;
 //auth
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Carbon;
+
+Carbon::setLocale('es');
 
 class UserController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -228,21 +232,40 @@ class UserController extends Controller
     //Funcion para retornar los usuarios registrados en el dia actual
     public function UserDays(){
         {
+            $today = Carbon::today();
             $usersToday = User::whereDate('created_at', today())->count();
-            return response()->json(['users_today' => $usersToday]);
+
+            return response()->json([
+                'users_today' => $usersToday,
+                'current_date' => $today->isoFormat('D, MMMM YYYY')
+            ]);
         }
     }
     //Retorna los usuarios registrados en la semana 
     public function UsersByWeek()
     {
-        $usuario = User::whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])->count();
-        return response()->json(['users_this_week' => $usuario]);
+        $Week = Carbon::now()->startOfWeek();
+        $enOfweek = Carbon::now()->endOfWeek(); 
+        $usuario = User::whereBetween('created_at', [$Week, $enOfweek])->count();
+        
+        return response()->json([
+            'week' => $usuario,
+            'current_week' => Carbon::now()->format('W'),
+            'current_date' => Carbon::now()->format('d  Y')
+        ]);
     }
+
     //Retorna los usuarios registrados en el mes
     public function UsersByMonth()
 {
-    $usuario = User::whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->count();
-    return response()->json(['users_this_month' => $usuario]);
+    $startOfMonth = Carbon::now()->startOfMonth();
+    $endOfMonth = Carbon::now()->endOfMonth();
+    $usuario = User::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
+
+    return response()->json([
+        'month' => $usuario,
+        'current_month' => Carbon::now()->format('F Y')
+    ]);
 }
 
 

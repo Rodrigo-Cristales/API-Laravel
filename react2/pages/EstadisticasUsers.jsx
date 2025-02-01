@@ -28,8 +28,11 @@ const EstadisticasUsers = () => {
             if (responseDay.data && responseWeek.data && responseMonth.data) {
                 setStats({
                     day: responseDay.data.users_today,
-                    week: responseWeek.data.users_this_week,
-                    month: responseMonth.data.users_this_month,
+                    week: responseWeek.data.week,
+                    month: responseMonth.data.month,
+                    currentDay: responseDay.data.current_day,
+                    currentDate: responseDay.data.current_date,
+                    currentMonth: responseMonth.data.current_month,
                 });
             } else {
                 console.error("Datos no válidos recibidos de la API");
@@ -51,7 +54,10 @@ const EstadisticasUsers = () => {
 
     return (
         <>
-            <h1 className="text-2xl font-bold text-center my-4">Estadísticas de usuarios creados</h1>
+    <h1 className="text-2xl font-bold text-center my-4">Estadísticas de usuarios creados</h1>
+    <p className="text-gray-300 mb-6">
+        Hoy es {stats.currentDate}
+    </p>
 <div className="overflow-x-auto">
   <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
     <thead className="bg-blue-500 text-white">
@@ -73,6 +79,10 @@ const EstadisticasUsers = () => {
         <td className="px-6 py-4 text-gray-700">Este Mes</td>
         <td className="px-6 py-4 font-semibold text-gray-900">{stats.month}</td>
       </tr>
+      <tr className='hover:bg-gray-100'>
+         <td className="px-6 py-4 text-gray-700">Mes Actual</td>
+         <td className="px- py-4 font-semibold text-gray-900">{stats.currentMonth}</td>
+            </tr>
     </tbody>
   </table>
 </div>
