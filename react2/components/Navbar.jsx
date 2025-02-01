@@ -96,8 +96,16 @@ function Navbar() {
               Home
             </Link>
           </li>
+          
           {token && (
             <li>
+              <Link
+                to="/estadisticas"
+                className="text-white text-lg hover:text-yellow-300 transition-colors duration-300 outline-none pe-5"
+              >
+                Estadísticas
+              </Link>
+
               <Link
                 onClick={handleLogout}
                 className="text-white text-lg hover:text-yellow-300 transition-colors duration-300 outline-none"
